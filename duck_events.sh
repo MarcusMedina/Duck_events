@@ -130,15 +130,28 @@ case "$month_day" in
   "02-21") echo "🔺 The Legend of Zelda released in Japan (1986). It's dangerous to go alone! Take this." ;;
   "03-10") echo "🍄 MAR10 Day — It's-a-me, Mario!" ;;
   "03-22") echo "🧟 Resident Evil release (1996). Enter survival horror." ;;
-  "05-22") echo "🟡 Pac-Man Day (1980). Waka-waka forever." ;;
+  "05-22") echo "🟡 Pac-Man Day (1980). Waka-waka forever."; echo "🏛️ Unreal released (1998)." ;;
   "06-06") echo "🕹️ Tetris released (1984). Rotate responsibly!" ;;
   "06-19") echo "💥 Counter-Strike beta (1999). Rush B!" ;;
   "06-22") echo "🧱 Quake release (1996). Gib responsibly." ;;
   "07-09") echo "🐒 Donkey Kong release (1981). It’s on like Donkey Kong!" ;;
+  "08-31") echo "☢️ Command & Conquer: Red Alert released (1996)." ;;
   "11-07") echo "🪐 Mass Effect N7 Day." ;;
   "11-11") echo "🌌 Skyrim release (2011). FUS RO DAH!" ;;
   "11-19") echo "🪖 Half-Life release (1998). Gordon Freeman reporting." ;;
+  "11-22") echo "🏆 Unreal Tournament released (1999)." ;;
+  "11-23") echo "⚔️ World of Warcraft launched (2004)." ;;
+  "12-02") echo "🚀 Quake III Arena released (1999)." ;;
   "12-10") echo "🔫 DOOM release (1993). Rip & tear!" ;;
+esac
+
+# Classic Sci-Fi & Cult Films
+case "$month_day" in
+  "06-03") echo "💻 WarGames premiered (1983). Shall we play a game?" ;;
+  "07-09") echo "💿 TRON premiered (1982). End of line." ;;
+  "09-18") echo "🛸 The Day the Earth Stood Still premiered (1951). Klaatu barada nikto." ;;
+  "09-26") echo "🎭 Carnival of Souls premiered (1962)." ;;
+  "10-21") echo "👹 The Doom movie premiered (2005). Rip & tear, on screen this time." ;;
 esac
 
 # Star Wars Universe
