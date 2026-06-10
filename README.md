@@ -14,7 +14,7 @@ Instead of a blank prompt, you'll be greeted by our friendly ASCII duck and a cu
   * **Astro & Seasonal Vibes:** Know the current Zodiac sign and get nuanced seasonal greetings based on astronomical events and ancient holidays (Sabbats).
   * **Time-Sensitive Greetings:** Get special messages for "Leet O'Clock" (13:37) if you log in at that exact time, Blue Monday, and different advice for weekdays vs. weekends.
   * **Optimized & Clean:** The script is refactored to be efficient, calling `date` only once per run.
-  * **Easy to Personalize:** A clearly marked section at the top makes it simple to add your own birthdays, anniversaries, and reminders.
+  * **Easy to Personalize:** Drop a `duck_personal.sh` in your home directory to add your own birthdays, anniversaries, and reminders — kept separate so your private dates never end up in this public repo.
 
 ## Sample Output
 
@@ -79,7 +79,16 @@ Save the file, close it, and open a new terminal. Your duck should now be there 
 
 ## 🔧 Customization
 
-This script is meant to be yours\! Open the `duck_events.sh` file and find the section at the top labeled `STEP 1: Personal Dates & Reminders`. You can easily add, edit, or remove any dates to make it perfectly tailored to you.
+This script is meant to be yours\! Create a `~/duck_personal.sh` file with your own `case "$month_day" in ... esac` block of birthdays, anniversaries, and reminders. If it exists, `duck_events.sh` will source it automatically (STEP 2: Personal Dates & Reminders) — no need to edit the script itself, and it works per-user if multiple people share a machine.
+
+Example `~/duck_personal.sh`:
+
+```bash
+case "$month_day" in
+  "06-20") echo "🎂 Happy Birthday!" ;;
+  "11-01") echo "❤️ Happy Anniversary!" ;;
+esac
+```
 
 ## Collaboration
 
