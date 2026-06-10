@@ -4,6 +4,9 @@
 #  Quirky, optimized terminal greetings & reminders.
 # ==============================================================================
 
+clear -x 
+printf '\033[3J'
+
 # --- ASCII Duck Greeter ---
 echo "
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⡶⠿⠿⠷⣶⣄⠀⠀⠀⠀⠀
@@ -60,15 +63,23 @@ else
     echo "Today's Zodiac sign is ♓ Pisces."
 fi
 
+# --- STEP 1b: Moon Phase Calculator ---
+moon_phases=("🌑 New Moon" "🌒 Waxing Crescent" "🌓 First Quarter" "🌔 Waxing Gibbous" "🌕 Full Moon" "🌖 Waning Gibbous" "🌗 Last Quarter" "🌘 Waning Crescent")
+moon_idx=$(awk -v now="$(date +%s)" 'BEGIN {
+    new_moon = 947182440  # 2000-01-06 18:14 UTC reference new moon
+    cycle = 2551442.8     # synodic month length in seconds
+    frac = (now - new_moon) / cycle
+    frac -= int(frac)
+    if (frac < 0) frac += 1
+    printf "%d", int(frac * 8 + 0.5) % 8
+}')
+echo "Tonight's moon: ${moon_phases[$moon_idx]}"
 
-# --- STEP 2: Personal Dates & Reminders (Optional) ---
-case "$month_day" in
-  "02-13") echo "💝 Reminder: Valentine's Day is tomorrow!" ;;
-  "06-20") echo "🎂 Happy Birthday, Marcus! Hope you have a great day." ;;
-  "10-12") echo "🎁 Reminder: One month until Helen’s birthday – time to find a gift!" ;;
-  "11-01") echo "❤️ Happy Anniversary Marcus & Helen!" ;;
-  "11-12") echo "🎂 Happy Birthday, Helen! ❤️" ;;
-esac
+
+# --- STEP 2: Personal Dates & Reminders (private, optional, per-user) ---
+if [ -f "$HOME/duck_personal.sh" ]; then
+    source "$HOME/duck_personal.sh"
+fi
 
 # --- STEP 3: Worldly, Geeky & Special Dates ---
 # General Holidays & Events
@@ -214,12 +225,12 @@ elif (( weekday_num < 6 )); then # It's a weekday (Mon-Fri)
         8|9) echo "☀️ Good morning! Time to conquer the code." ;;
         12|13) echo "🍽️ Lunch time! Step away from the screen." ;;
         16|17) echo "🏁 Almost there — time to wrap it up." ;;
-        21) echo " unwind." ;;
+        21) echo "🌆 Time to unwind." ;;
         22|23)
             if [ "$weekday" = "Friday" ]; then
                 echo "🎉 It's Friday night! Time to relax or party!"
             else
-                echo " Dude, you need to sleep. Workday tomorrow."
+                echo "😴 Dude, you need to sleep. Workday tomorrow."
             fi
             ;;
     esac
