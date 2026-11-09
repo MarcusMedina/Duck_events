@@ -227,8 +227,8 @@ if [ "$month" = "02" ] && [ "$weekday" = "Monday" ]; then
     echo "🎶 All my mornings are Mondays stuck in an endless February..."
 fi
 
-# --- Christmas Countdown (Nov 15 - Dec 24) ---
-if [[ "$month_day" > "11-14" && "$month_day" < "12-25" ]]; then
+# --- Christmas Countdown (Nov 1 - Dec 24) ---
+if [[ "$month_day" > "10-31" && "$month_day" < "12-25" ]]; then
     days_to_xmas=$(( ( $(date -d "$(date +%Y)-12-24" +%s) - $(date -d "$today" +%s) ) / 86400 ))
     weeks_to_xmas=$(( (days_to_xmas + 6) / 7 ))
     # Fridays from today up to and including Dec 24 (Friday = %u 5)
