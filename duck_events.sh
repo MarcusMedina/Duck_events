@@ -227,6 +227,26 @@ if [ "$month" = "02" ] && [ "$weekday" = "Monday" ]; then
     echo "🎶 All my mornings are Mondays stuck in an endless February..."
 fi
 
+# --- Christmas Countdown (Nov 15 - Dec 24) ---
+if [[ "$month_day" > "11-14" && "$month_day" < "12-25" ]]; then
+    days_to_xmas=$(( ( $(date -d "$(date +%Y)-12-24" +%s) - $(date -d "$today" +%s) ) / 86400 ))
+    weeks_to_xmas=$(( (days_to_xmas + 6) / 7 ))
+    # Fridays from today up to and including Dec 24 (Friday = %u 5)
+    to_friday=$(( (12 - weekday_num) % 7 ))
+    if [ "$days_to_xmas" -ge "$to_friday" ]; then
+        fridays_to_xmas=$(( (days_to_xmas - to_friday) / 7 + 1 ))
+    else
+        fridays_to_xmas=0
+    fi
+    if [ "$days_to_xmas" -eq 0 ]; then
+        :  # Christmas Eve has its own greeting above
+    elif [ "$days_to_xmas" -lt 7 ]; then
+        echo "🎄 $days_to_xmas day(s) to Christmas ($fridays_to_xmas Friday(s) left)"
+    else
+        echo "🎄 $weeks_to_xmas weeks to Christmas ($days_to_xmas days, $fridays_to_xmas Fridays)"
+    fi
+fi
+
 # --- STEP 4: Hourly & Weekend Greetings ---
 if [ "$hour" -eq 13 ] && [ "$minute" -eq 37 ]; then
     echo "👾 13:37 - L33T H4X0R T1M3!"
